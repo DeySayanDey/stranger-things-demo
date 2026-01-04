@@ -1,0 +1,172 @@
+.hero {
+  height: 100vh;
+  background-image: url('/images/will1.webp');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  transition: filter 0.8s ease;
+}
+
+/* Color grading changes when in Upside Down mode */
+.upside-down-mode {
+  filter: contrast(1.4) brightness(0.7) sepia(0.4) hue-rotate(-15deg);
+}
+
+/* === FLASHLIGHT / MONSTER REVEAL === */
+  .fire-reveal {
+    background-position: 40% 7% !important;
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/v1.png');
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.55s ease;
+    --tx: calc(var(--x) - 24px);
+  --ty: calc(var(--y) - 18px);
+ 
+    mask-image:
+    radial-gradient(circle 400px at var(--x) var(--y),
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,0.6) 40%,
+      transparent 70%),
+    radial-gradient(circle 450px at calc(var(--x) + 50px) calc(var(--y) - 40px),
+      rgba(255,255,255,0.8) 0%,
+      rgba(255,255,255,0.4) 40%,
+      transparent 70%),
+    radial-gradient(circle 200px at calc(var(--x) - 50px) calc(var(--y) + 30px),
+      rgba(255,255,255,0.6) 0%,
+      rgba(255,255,255,0.3) 40%,
+      transparent 70%);
+  -webkit-mask-image:
+    radial-gradient(circle 400px at var(--x) var(--y),
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,0.6) 40%,
+      transparent 70%),
+    radial-gradient(circle 450px at calc(var(--x) + 50px) calc(var(--y) - 40px),
+      rgba(255,255,255,0.8) 0%,
+      rgba(255,255,255,0.4) 40%,
+      transparent 70%),
+    radial-gradient(circle 400px at calc(var(--x) - 50px) calc(var(--y) + 30px),
+      rgba(255,255,255,0.6) 0%,
+      rgba(255,255,255,0.3) 40%,
+      transparent 70%);
+
+  animation: pulseBlob 3s ease-in-out infinite;
+}
+
+.fire-reveal.active {
+  opacity: 1;
+}
+
+/* Permanent visibility in Upside Down mode */
+.fire-reveal.active-permanent {
+  opacity: 0.6;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+  animation: breathe 6s infinite ease-in-out;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.05); opacity: 0.4; }
+}
+
+/* === LAYOUT & TYPOGRAPHY === */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+}
+
+.left {
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  width: 400px; /* Increased width for better text flow */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.left h1 {
+  font-size: 70px;
+  color: red;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
+.left p {
+  font-size: 20px;
+  color: #f0f0f0;
+  text-shadow: 2px 2px 4px black;
+}
+
+.left button {
+  width: fit-content;
+  font-size: 18px;
+  padding: 15px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(0,0,0,0.7);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.left button:hover {
+  background: #b30000;
+  border-color: red;
+}
+
+.right {
+  position: absolute;
+  bottom: 100px;
+  right: 50px;
+  text-align: right;
+  width: 500px;
+}
+
+.right h1 {
+  font-size: 60px;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
+.right p {
+  font-size: 22px;
+  color: #ddd;
+  text-shadow: 2px 2px 4px black;
+}
+
+/* === GLITCH TEXT (Applied to characters via SplitText) === */
+/* We remove the boxy background glitch and use a text-shadow based one */
+.glitch-char {
+  position: relative;
+  display: inline-block;
+  color: red;
+  animation: glitch-shake 3s infinite;
+}
+
+@keyframes glitch-shake {
+  0% { transform: translate(0,0); }
+  2% { transform: translate(1px, -1px); }
+  4% { transform: translate(-1px, 1px); }
+  6% { transform: translate(0,0); }
+  100% { transform: translate(0,0); }
+}
+
+.audio-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  color: white;
+  cursor: pointer;
+  font-family: monospace;
+  background: rgba(0,0,0,0.5);
+  padding: 5px 15px;
+  border-radius: 5px;
+}

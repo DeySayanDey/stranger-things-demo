@@ -1,0 +1,13 @@
+.split-text-wrapper {
+  display: inline-block;
+}
+
+.char {
+  display: inline-block;
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncy flip */
+  transform-origin: center center;
+}
+
+.char.rotated {
+  transform: rotate(180deg);
+}
