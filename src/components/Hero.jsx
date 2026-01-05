@@ -96,7 +96,7 @@ const Hero = () => {
     <div className={`hero ${isUpsideDown ? 'upside-down-mode' : ''}`} ref={heroRef}>
       
       <audio ref={audioRef} loop>
-        <source src="/audio/theme.mp3" type="audio/mp3" />
+        <source src={`${import.meta.env.BASE_URL}audio/theme.mp3`} type="audio/mp3" />
       </audio>
 
       {/* Spores Layer */}
